@@ -29,6 +29,15 @@ public class UserCredentialServiceImpl implements UserCredentialService {
     }
 
     @Override
+    public String createUser(String username, char[] password){
+        UserCredentialEntity newUser = new UserCredentialEntity();
+        newUser.setUsername(username);
+        newUser.setPassword(passwordEncoder.encode(CharBuffer.wrap(password)));
+        userCredentialDao.save(newUser);
+        return newUser.getUsername();
+    }
+
+    @Override
     public boolean userExists(String username){
         return userCredentialDao.findByUsername(username) != null;
     }

@@ -3,8 +3,11 @@ package com.avent.base.security.controller;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.avent.base.model.response.ResponseModel;
+import com.avent.base.security.service.JwtService;
+import com.avent.base.security.service.UserCredentialService;
 import com.avent.security.model.LoginModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,9 +28,12 @@ import java.util.UUID;
 public class SecurityController {
 
     private final AuthenticationConfiguration configuration;
-    private final Algorithm algorithm;
+    private final UserCredentialService userCredentialService;
+    private final JwtService jwtService;
 
-    public static final long TOKEN_VALIDITY_MILIS = 1000 * 60 * 60 * 1; // 1 hour
+    @Value("${security.jwt.secret}")
+    private String jwtSecret;
+
 
     @PostMapping("/login")
     public ResponseModel<String> authenticateUser(@RequestBody LoginModel loginModel) throws Exception {
@@ -36,15 +42,14 @@ public class SecurityController {
                 loginModel.getUsername(), loginModel.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwtToken = JWT.create()
-                .withIssuer("Avent-WCC")
-                .withSubject(loginModel.getUsername())
-                .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_VALIDITY_MILIS))
-                .withJWTId(UUID.randomUUID()
-                        .toString())
-                .sign(algorithm);
 
-        return ResponseModel.success(jwtToken);
+        return ResponseModel.success(jwtService.createJwt(loginModel.getUsername(), jwtSecret));
+    }
+
+    //Temp API for testing
+    @PostMapping("/signup")
+    public ResponseModel<String> signupUser(@RequestBody LoginModel loginModel) throws Exception {
+        String user = userCredentialService.createUser(loginModel.getUsername(), loginModel.getPassword());
+        return ResponseModel.success(String.format("User %s signed up successfully", user));
     }
 }

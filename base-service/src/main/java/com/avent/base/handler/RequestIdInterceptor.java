@@ -17,7 +17,6 @@ public class RequestIdInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        log.info("RequestIdInterceptor: preHandle");
         String requestId = UUID.randomUUID().toString();
         RequestUtil.putData(RequestUtil.REQUEST_ID, requestId);
         MDC.put("requestId", requestId);

@@ -30,13 +30,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public Algorithm algorithm() {
-        return Algorithm.HMAC256(jwtSecret);
-    }
-
-    @Bean
-    public JWTVerifier jwtVerifier(Algorithm algorithm) {
-        return JWT.require(algorithm)
+    public JWTVerifier jwtVerifier() {
+        return JWT.require(Algorithm.HMAC256(jwtSecret))
                 .withIssuer("Avent-WCC")
                 .build();
     }
