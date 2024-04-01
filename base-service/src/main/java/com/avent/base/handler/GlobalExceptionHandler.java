@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -40,6 +41,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageConversionException.class)
     public ResponseEntity<ResponseModel<String>> handleException(HttpServletRequest httpServletRequest, HttpMessageConversionException ex) {
+        log.error("GlobalExceptionHandler: HttpMessageConversionException handled:{} - {}", ex.getClass(), ex.getMessage());
+        return new ResponseEntity<>(ResponseModel.fail(ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ResponseModel<String>> handleException(HttpServletRequest httpServletRequest, MethodArgumentNotValidException ex) {
         log.error("GlobalExceptionHandler: HttpMessageConversionException handled:{} - {}", ex.getClass(), ex.getMessage());
         return new ResponseEntity<>(ResponseModel.fail(ex.getMessage()), HttpStatus.BAD_REQUEST);
     }

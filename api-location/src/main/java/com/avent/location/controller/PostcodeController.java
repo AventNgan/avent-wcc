@@ -9,6 +9,8 @@ import com.avent.location.service.PostcodeLatLngService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/postcode")
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class PostcodeController {
     }
 
     @PostMapping("/update")
-    public ResponseModel<PostcodeUpdateResponseModel> updatePostcode(@RequestBody PostcodeUpdateRequestModel postcodeUpdateRequestModel) throws EntityNotFoundException {
+    public ResponseModel<PostcodeUpdateResponseModel> updatePostcode(@Valid @RequestBody PostcodeUpdateRequestModel postcodeUpdateRequestModel) throws EntityNotFoundException {
         return ResponseModel.success(postcodeLatLngService.updatePostcode(postcodeUpdateRequestModel));
     }
 }
