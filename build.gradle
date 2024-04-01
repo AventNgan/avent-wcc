@@ -1,0 +1,89 @@
+plugins {
+    id "org.springframework.boot" version "2.7.4"
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'war'
+}
+
+group = 'com.avent'
+version = '1.0-SNAPSHOT'
+
+
+repositories {
+    mavenCentral()
+    maven { url 'https://plugins.gradle.org/m2/' }
+
+}
+
+
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'war'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation "org.projectlombok:lombok:1.18.32"
+        annotationProcessor 'org.projectlombok:lombok'
+
+        implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        implementation 'org.slf4j:slf4j-api:1.7.25'
+        testImplementation 'org.mockito:mockito-core'
+        testImplementation 'org.mockito:mockito-inline:3.12.4'
+
+    }
+}
+
+
+configure(subprojects.findAll {it.name != 'base-exception'}) {
+    dependencies {
+        implementation project(':base-exception')
+    }
+}
+
+configure(subprojects.findAll {it.name.contains('model-')}) {
+    dependencies {
+        api project(':base-model')
+    }
+}
+
+configure(subprojects.findAll {it.name.contains('entity-')}) {
+    dependencies {
+        api project(':base-entity')
+    }
+}
+
+configure(subprojects.findAll {it.name.contains('repository-')}) {
+    dependencies {
+        api project(':base-repository')
+    }
+}
+
+configure(subprojects.findAll {it.name.contains('service-') || it.name.contains('api-')}) {
+    dependencies {
+        //mysql driver
+        implementation 'mysql:mysql-connector-java'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
+        implementation project(':base-service')
+
+    }
+}

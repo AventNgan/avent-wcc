@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$USER_HOME$/.sdkman/candidates/gradle/7.3.3" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api-location" />
+            <option value="$PROJECT_DIR$/base-entity" />
+            <option value="$PROJECT_DIR$/base-exception" />
+            <option value="$PROJECT_DIR$/base-model" />
+            <option value="$PROJECT_DIR$/base-repository" />
+            <option value="$PROJECT_DIR$/base-security" />
+            <option value="$PROJECT_DIR$/base-service" />
+            <option value="$PROJECT_DIR$/constant-location" />
+            <option value="$PROJECT_DIR$/entity-location" />
+            <option value="$PROJECT_DIR$/entity-security" />
+            <option value="$PROJECT_DIR$/model-location" />
+            <option value="$PROJECT_DIR$/model-security" />
+            <option value="$PROJECT_DIR$/repository-location" />
+            <option value="$PROJECT_DIR$/repository-security" />
+            <option value="$PROJECT_DIR$/service-location" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

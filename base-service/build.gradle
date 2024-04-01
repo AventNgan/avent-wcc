@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.avent'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(':base-exception')
+    implementation project(':base-model')
+    implementation project(':base-repository')
+    implementation project(':base-security')
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.springframework:spring-test'
+    testImplementation project(':model-location')
+}
+
+test {
+    useJUnitPlatform()
+}

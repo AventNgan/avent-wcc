@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.avent'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api project(':model-location')
+    api project(':repository-location')
+    implementation project(':constant-location')
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
