@@ -10,5 +10,11 @@ services:
       MYSQL_ROOT_PASSWORD: P@ssw0rd
       TZ: "Asia/Kuala_Lumpur"
     volumes:
-      - "./scripts/ukpostcodes_tablemysql.sql:/docker-entrypoint-initdb.d/1.sql"
-      - "./scripts/ukpostcodesmysql.sql:/docker-entrypoint-initdb.d/2.sql"
+      - "./scripts/ddl.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./scripts/dml_1:/docker-entrypoint-initdb.d/2.sql"
+#      - "./scripts/dml_2:/docker-entrypoint-initdb.d/3.sql"
+#      - "./scripts/dml_3:/docker-entrypoint-initdb.d/4.sql"
+#      - "./scripts/dml_4:/docker-entrypoint-initdb.d/5.sql"
+#      - "./scripts/dml_5:/docker-entrypoint-initdb.d/6.sql"
+#      - "./scripts/dml_6:/docker-entrypoint-initdb.d/7.sql"
+#      - "./scripts/dml_7:/docker-entrypoint-initdb.d/8.sql"
