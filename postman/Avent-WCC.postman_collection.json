@@ -13,7 +13,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/distance/postcode?postcode1=AB10 6RN&postcode2=AB15 6NA&unit=foot",
+					"raw": "{{url}}/distance/postcode?postcode1=AB10 6RN&postcode2=AB15 6NA&unit=km",
 					"host": [
 						"{{url}}"
 					],
@@ -32,7 +32,7 @@
 						},
 						{
 							"key": "unit",
-							"value": "foot"
+							"value": "km"
 						}
 					]
 				}
