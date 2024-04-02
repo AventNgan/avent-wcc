@@ -51,8 +51,12 @@ When you are done with the database, you can stop the container by running the f
 docker compose down
 ```
 
-> If you do not destroy the container, the container will remain and may take up resources on your machine.
+If you do not destroy the container, the container will remain and may take up resources on your machine.
 
+If you have no other use for the mysql image and with to remove it to free up storage space, run the following command to remove the image.
+```bash
+docker image rm mysql
+```
 
 ---
 
